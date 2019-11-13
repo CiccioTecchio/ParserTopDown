@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class RecDesParser {
-    private static Logger logger = Logger.getLogger("global");
 
     private List<Token> tokenList;
     private Lexer lexer;
@@ -24,10 +22,6 @@ public class RecDesParser {
         lexer = new Lexer();
         fr = new BufferedInputStream(new FileInputStream(fileName));
         index = 0;
-    }
-
-    public boolean parsing() throws IOException{
-        return program();
     }
 
     public boolean program() throws IOException {
@@ -48,7 +42,7 @@ public class RecDesParser {
             if(stmt()){
                 if(program1()){
                     tr = true;
-                }else index = back;
+                }else index = back; //backtrack
             }else index = back;
         }else tr = true;//epsilon
         return  tr;
@@ -111,8 +105,11 @@ public class RecDesParser {
     public boolean term() throws IOException{
         boolean tr = false;
         this.tokenList.add(lexer.nextToken(fr));
-        String classe = tokenList.get(index).getClasse().toString();
-        if(classe.contains("ID:") || classe.contains("CONST") || classe.equals("TRUE") || classe.equals("FALSE")) {
+        String classe = tokenList.get(index).getClasse();
+        if(classe.contains("ID:") ||
+           classe.contains("CONST") ||
+           classe.equals("TRUE") ||
+           classe.equals("FALSE")) {
             index++;
             tr = true;
         }

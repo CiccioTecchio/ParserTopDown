@@ -10,9 +10,8 @@ public class Main {
 
     public static void main(String[] args) {
         try{
-            String toPrint = parseTestFile(FAILPATH, 7);
-            toPrint += parseTestFile(SUCCPATH, 6);
-            System.out.println(toPrint);
+            System.out.println(parseTestFile(FAILPATH, 7)+""
+                              +parseTestFile(SUCCPATH, 6));
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -23,7 +22,7 @@ public class Main {
         for(int i = 0; i < numFile; i++){
             String name = path+(i+1)+".txt";
             RecDesParser parser = new RecDesParser(name);
-            String result = (parser.parsing())?"Accepted":"Rejected";
+            String result = (parser.program())?"Accepted":"Rejected";
             toPrint+="Outcome "+name+": "+result+"\n";
         }
         return toPrint;
