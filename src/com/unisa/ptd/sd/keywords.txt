@@ -1,0 +1,12 @@
+if
+then
+else
+int
+double
+float
+long
+true
+false
+while
+for
+null

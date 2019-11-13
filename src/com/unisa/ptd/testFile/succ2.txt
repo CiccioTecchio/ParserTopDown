@@ -1,0 +1,7 @@
+a <-- 0;
+b <-- 1;
+if a >= b then
+    if a = b then
+        a <-- b;
+    b <-- a;
+a <-- b
